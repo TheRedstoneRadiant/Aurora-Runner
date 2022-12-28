@@ -33,7 +33,7 @@ def run_containers(tokens):
             "run",
             "-d",
             "-e",
-            f"DISCORD_TOKEN={token['discordToken']}",
+            f"TOKEN={token['discordToken']}",
         ]
         if "canvasToken" in token:
             payload += ["-e", f"VLC_TOKEN={token['canvasToken']}"]
