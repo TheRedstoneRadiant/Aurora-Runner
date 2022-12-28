@@ -35,7 +35,7 @@ def run_containers(tokens):
             "-e",
             f"DISCORD_TOKEN={token['discordToken']}",
         ]
-        if token["canvasToken"]:
+        if "canvasToken" in token:
             payload += ["-e", f"CANVAS_TOKEN={token['canvasToken']}"]
 
         payload.append(IMAGE_NAME)
