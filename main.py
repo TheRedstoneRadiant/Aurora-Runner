@@ -26,7 +26,25 @@ def add_token(DISCORD_TOKEN, CANVAS_TOKEN=""):
     token_collection.insert_one(payload)
 
 
+def kill_containers():
+    subprocess.run[
+        "docker",
+        "rm",
+        "$(docker",
+        "stop",
+        "$(docker",
+        "ps",
+        "-a",
+        "-q",
+        "--filter",
+        f"ancestor={IMAGE_NAME}",
+        '--format="{{.ID}}"))',
+    ]
+
+
 def run_containers(tokens):
+    kill_containers()
+
     for token in tokens:
         payload = [
             "docker",
