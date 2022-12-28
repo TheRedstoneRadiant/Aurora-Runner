@@ -5,6 +5,19 @@ import pymongo
 import dotenv
 
 
+db = pymongo.MongoClient(os.environ["MONGO_URI"])
+token_collection = db.aurora.tokens
+
+
+def add_token(DISCORD_TOKEN, CANVAS_TOKEN=""):
+    payload = {"discordToken": DISCORD_TOKEN}
+
+    if CANVAS_TOKEN:
+        payload["canvasToken"] = CANVAS_TOKEN
+
+    token_collection.insert_one(payload)
+
+
 def run_containers(tokens):
     for token in tokens:
         print(token)
@@ -16,9 +29,6 @@ def main():
     if not os.environ["MONGO_URI"]:
         print("Missing MONGO_URI env variable")
         sys.exit(1)
-
-    db = pymongo.MongoClient(os.environ["MONGO_URI"])
-    token_collection = db.aurora.tokens
 
     run_containers(token_collection.find())
 
