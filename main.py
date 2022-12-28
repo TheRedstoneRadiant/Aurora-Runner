@@ -27,7 +27,7 @@ def add_token(DISCORD_TOKEN, CANVAS_TOKEN=""):
 
 
 def kill_containers():
-    subprocess.run(
+    os.system(
         f'docker rm $(docker stop $(docker ps -a -q --filter ancestor={IMAGE_NAME} --format="{{.ID}}"))'
     )
 
