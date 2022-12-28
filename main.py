@@ -27,19 +27,21 @@ def add_token(DISCORD_TOKEN, CANVAS_TOKEN=""):
 
 
 def kill_containers():
-    subprocess.run[
-        "docker",
-        "rm",
-        "$(docker",
-        "stop",
-        "$(docker",
-        "ps",
-        "-a",
-        "-q",
-        "--filter",
-        f"ancestor={IMAGE_NAME}",
-        '--format="{{.ID}}"))',
-    ]
+    subprocess.run(
+        [
+            "docker",
+            "rm",
+            "$(docker",
+            "stop",
+            "$(docker",
+            "ps",
+            "-a",
+            "-q",
+            "--filter",
+            f"ancestor={IMAGE_NAME}",
+            '--format="{{.ID}}"))',
+        ]
+    )
 
 
 def run_containers(tokens):
