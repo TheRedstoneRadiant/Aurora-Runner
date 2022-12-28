@@ -31,6 +31,8 @@ def run_containers(tokens):
         payload = [
             "docker",
             "run",
+            "--name",
+            token["discordToken"].split(".")[0],
             "-d",
             "-e",
             f"TOKEN={token['discordToken']}",
