@@ -17,8 +17,8 @@ db = pymongo.MongoClient(os.environ["MONGO_URI"])
 token_collection = db.aurora.tokens
 
 
-def add_token(DISCORD_TOKEN, CANVAS_TOKEN=""):
-    payload = {"discordToken": DISCORD_TOKEN}
+def add_token(DISCORD_TOKEN, CANVAS_TOKEN="", name=""):
+    payload = {"discordToken": DISCORD_TOKEN, "name": name}
 
     if CANVAS_TOKEN:
         payload["canvasToken"] = CANVAS_TOKEN
@@ -27,6 +27,8 @@ def add_token(DISCORD_TOKEN, CANVAS_TOKEN=""):
 
 
 def kill_containers():
+    print("Killing containers...")
+    
     os.system(
         f'docker rm $(docker stop $(docker ps -a -q --filter ancestor={IMAGE_NAME} --format="{{{{.ID}}}}"))'
     )
@@ -50,6 +52,7 @@ def run_containers(tokens):
 
         payload.append(IMAGE_NAME)
 
+        print(f"Running {token['name']}'s selfbot")
         subprocess.run(payload)
 
 
