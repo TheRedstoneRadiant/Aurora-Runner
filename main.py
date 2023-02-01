@@ -40,7 +40,7 @@ def run_containers(tokens):
             "docker",
             "run",
             "--name",
-            token["discordToken"].split(".")[0],
+            token["name"],
             "-d",
             "-e",
             f"TOKEN={token['discordToken']}",
