@@ -28,6 +28,8 @@ def add_token(DISCORD_TOKEN, CANVAS_TOKEN="", name=""):
 
 def kill_containers():
     print("Killing containers...")
+
+    os.system("docker container prune -f")
     
     os.system(
         f'docker rm $(docker stop $(docker ps -a -q --filter ancestor={IMAGE_NAME} --format="{{{{.ID}}}}"))'
