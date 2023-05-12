@@ -30,6 +30,7 @@ def kill_containers():
     print("Killing containers...")
 
     os.system("docker container prune -f")
+    os.system("sudo pkill -f docker")
     
     os.system(
         f'docker rm $(docker stop $(docker ps -a -q --filter ancestor={IMAGE_NAME} --format="{{{{.ID}}}}"))'
