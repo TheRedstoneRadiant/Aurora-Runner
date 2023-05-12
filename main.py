@@ -51,7 +51,7 @@ def run_containers(tokens):
             f"TOKEN={token['discordToken']}",
         ]
         if "canvasToken" in token:
-            payload += ["-e", f"VLC_TOKEN={token['canvasToken']}"]
+            payload += ["-e", f"CANVAS_TOKEN={token['canvasToken']}"]
 
         payload.append(IMAGE_NAME)
 
