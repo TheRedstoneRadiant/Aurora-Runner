@@ -53,6 +53,9 @@ def run_containers(tokens):
         if "canvasToken" in token:
             payload += ["-e", f"CANVAS_TOKEN={token['canvasToken']}"]
 
+        if "loggerWebhookUrl" in token:
+            payload += ["-e", f"LOGGER_WEBHOOK_URL={token['loggerWebhookUrl']}"]
+
         payload.append(IMAGE_NAME)
 
         print(f"Running {token['name']}'s selfbot")
