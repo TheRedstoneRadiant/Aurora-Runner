@@ -17,11 +17,14 @@ db = pymongo.MongoClient(os.environ["MONGO_URI"])
 token_collection = db.aurora.tokens
 
 
-def add_token(DISCORD_TOKEN, CANVAS_TOKEN="", name=""):
+def add_token(DISCORD_TOKEN, CANVAS_TOKEN="", CANVAS_URL="", name=""):
     payload = {"discordToken": DISCORD_TOKEN, "name": name}
 
     if CANVAS_TOKEN:
         payload["canvasToken"] = CANVAS_TOKEN
+
+    if CANVAS_URL:
+        payload["canvasUrl"] = CANVAS_URL
 
     token_collection.insert_one(payload)
 
@@ -52,6 +55,9 @@ def run_containers(tokens):
         ]
         if "canvasToken" in token:
             payload += ["-e", f"CANVAS_TOKEN={token['canvasToken']}"]
+
+        if "canvasUrl" in token:
+            payload += ["-e", f"CANVAS_URL={token['canvasUrl']}"]
 
         if "loggerWebhookUrl" in token:
             payload += ["-e", f"LOGGER_WEBHOOK_URL={token['loggerWebhookUrl']}"]
